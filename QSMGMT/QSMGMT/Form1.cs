@@ -33,37 +33,29 @@ namespace QSMGMT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ILocation location = null;
-            try
-            {
-                var uri = new Uri("https://qliksense.credon.eu:4747");
-                location = Qlik.Engine.Location.FromUri(uri);
-                X509Certificate2 x509 = new X509Certificate2(@"C:\\GITHUB\\QSMGMT\\QSMGMT\\QSMGMT\\QS Certificates\\CRED DEMO SERVER\\CREDON35\\client.pfx","test");
-                location.IsVersionCheckActive = false;
-                X509Certificate2Collection certificateCollection = new X509Certificate2Collection(x509);
-                // Defining the location as a direct connection to Qlik Sense Server
-                location.AsDirectConnectionAsync("DEMO", "QSADMIN", certificateValidation: false, certificateCollection: certificateCollection); 
-            }
-            catch (CommunicationErrorException cex)
-            {
-                Console.WriteLine("Can not connect to Qlik Sense instance, check that Qlik Sense is running." + Environment.NewLine + cex.Message);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("General error." + Environment.NewLine + ex.Message);
-            }
+            //ILocation location = new Connetion().location;
 
-            //  String[] test = new String[] { "test"}; 
+            //MessageBox.Show("Alive: " + location.IsAlive());
 
-            List<String> test = new List<String>();
+            //List<String> test = new List<String>();
 
-            foreach (IAppIdentifier appIdentifier in location.GetAppIdentifiers())
-            {
-                Console.WriteLine(appIdentifier.AppName);
-                test.Add(appIdentifier.AppName);
-            }
+            //foreach (IAppIdentifier appIdentifier in location.GetAppIdentifiers())
+            //{
+            //    Console.WriteLine(appIdentifier.AppName);
+            //    test.Add(appIdentifier.AppName);
+            //}
 
-            listBox1.DataSource = test;
+            //listBox1.DataSource = test;
+        }
+
+        private void showConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateConnection ConnectionForm = new CreateConnection();
+            ConnectionForm.ShowDialog();
         }
     }
 }

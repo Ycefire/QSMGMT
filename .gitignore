@@ -57,6 +57,10 @@ artifacts/
 # StyleCop
 StyleCopReport.xml
 
+# Files by QS
+*.pfx
+*.cer
+
 # Files built by Visual Studio
 *_i.c
 *_p.c
