@@ -16,11 +16,20 @@ namespace QSMGMT
 {
     public partial class Form1 : Form
     {
+        private ILocation _location = null;
+
         public Form1()
         {
             InitializeComponent();
 
         }
+
+        public ILocation location
+        {
+            get { return _location; }
+            set { _location = value; }
+        }
+
         internal static byte[] ReadFile(string fileName)
         {
             FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -54,7 +63,7 @@ namespace QSMGMT
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateConnection ConnectionForm = new CreateConnection();
+            CreateConnection ConnectionForm = new CreateConnection(this);
             ConnectionForm.ShowDialog();
         }
     }

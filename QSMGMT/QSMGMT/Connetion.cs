@@ -14,10 +14,10 @@ namespace QSMGMT
 
         private ILocation _location = null;
 
-        public Connetion(string url)
+        public Connetion(string url, String pfx, String pfxPass, String userId, String domain)
         {
             url = url + ":4747";
-            ConnectToQlikSense(url);
+            ConnectToQlikSense(url,pfx, pfxPass,userId,domain);
 
         }
 
@@ -27,17 +27,16 @@ namespace QSMGMT
             set { _location = value; }
         }
 
-        public void ConnectToQlikSense(string url)
+        public void ConnectToQlikSense(string url, String pfx, String pfxPass,String userId,String domain)
         {
             try
             {
                 var uri = new Uri(url);
                 _location = Qlik.Engine.Location.FromUri(uri);
-                X509Certificate2 x509 = new X509Certificate2(@"C:\\GITHUB\\QSMGMT\\QSMGMT\\QSMGMT\\QS Certificates\\CRED DEMO SERVER\\CREDON35\\client.pfx", "test");
+                X509Certificate2 x509 = new X509Certificate2(pfx,pfxPass);
                 _location.IsVersionCheckActive = false;
                 X509Certificate2Collection certificateCollection = new X509Certificate2Collection(x509);
-                // Defining the location as a direct connection to Qlik Sense Server
-                _location.AsDirectConnectionAsync("DEMO", "QSADMIN", certificateValidation: false, certificateCollection: certificateCollection);
+                _location.AsDirectConnectionAsync(domain,userId, certificateValidation: false, certificateCollection: certificateCollection);
             }
             catch (CommunicationErrorException cex)
             {

@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Label lab;
             this.ServerUrlLabel = new System.Windows.Forms.Label();
             this.ServerUrlTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BrowseClient = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.ServerName = new System.Windows.Forms.TextBox();
+            this.ClientPassword = new System.Windows.Forms.TextBox();
+            this.UserId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.Password = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            lab = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,15 +83,15 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // button2
+            // BrowseClient
             // 
-            this.button2.Location = new System.Drawing.Point(3, 299);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 39);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "....";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BrowseClient.Location = new System.Drawing.Point(3, 299);
+            this.BrowseClient.Name = "BrowseClient";
+            this.BrowseClient.Size = new System.Drawing.Size(118, 39);
+            this.BrowseClient.TabIndex = 4;
+            this.BrowseClient.Text = "....";
+            this.BrowseClient.UseVisualStyleBackColor = true;
+            this.BrowseClient.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
@@ -109,39 +110,39 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Server Name";
             // 
-            // textBox2
+            // ServerName
             // 
-            this.textBox2.Location = new System.Drawing.Point(144, 238);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(412, 29);
-            this.textBox2.TabIndex = 7;
+            this.ServerName.Location = new System.Drawing.Point(144, 238);
+            this.ServerName.Name = "ServerName";
+            this.ServerName.Size = new System.Drawing.Size(412, 29);
+            this.ServerName.TabIndex = 7;
             // 
-            // textBox3
+            // ClientPassword
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(144, 380);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(412, 29);
-            this.textBox3.TabIndex = 9;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.ClientPassword.Enabled = false;
+            this.ClientPassword.Location = new System.Drawing.Point(171, 380);
+            this.ClientPassword.Name = "ClientPassword";
+            this.ClientPassword.Size = new System.Drawing.Size(412, 29);
+            this.ClientPassword.TabIndex = 9;
+            this.ClientPassword.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // label2
+            // lab
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 383);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 25);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Password";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            lab.AutoSize = true;
+            lab.Location = new System.Drawing.Point(12, 383);
+            lab.Name = "lab";
+            lab.Size = new System.Drawing.Size(153, 25);
+            lab.TabIndex = 8;
+            lab.Text = "Client Password";
+            lab.Click += new System.EventHandler(this.label2_Click);
             // 
-            // textBox4
+            // UserId
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(144, 475);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(412, 29);
-            this.textBox4.TabIndex = 11;
+            this.UserId.Enabled = false;
+            this.UserId.Location = new System.Drawing.Point(144, 475);
+            this.UserId.Name = "UserId";
+            this.UserId.Size = new System.Drawing.Size(412, 29);
+            this.UserId.TabIndex = 11;
             // 
             // label3
             // 
@@ -153,22 +154,23 @@
             this.label3.Text = "User";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // textBox5
+            // Password
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(144, 544);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(412, 29);
-            this.textBox5.TabIndex = 13;
+            this.Password.Enabled = false;
+            this.Password.Location = new System.Drawing.Point(144, 544);
+            this.Password.Name = "Password";
+            this.Password.Size = new System.Drawing.Size(412, 29);
+            this.Password.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 547);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 25);
+            this.label4.Size = new System.Drawing.Size(79, 25);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Password";
+            this.label4.Text = "Domain";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // CreateConnection
             // 
@@ -176,21 +178,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1319, 833);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.Password);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.UserId);
+            this.Controls.Add(this.ClientPassword);
+            this.Controls.Add(lab);
+            this.Controls.Add(this.ServerName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.BrowseClient);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ServerUrlTextBox);
             this.Controls.Add(this.ServerUrlLabel);
             this.Name = "CreateConnection";
             this.Text = "CreateConnection";
+            this.Load += new System.EventHandler(this.CreateConnection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -203,15 +206,14 @@
         private System.Windows.Forms.TextBox ServerUrlTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BrowseClient;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox ServerName;
+        private System.Windows.Forms.TextBox ClientPassword;
+        private System.Windows.Forms.TextBox UserId;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.Label label4;
     }
 }
