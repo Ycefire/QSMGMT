@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using QSMGMT.Repos;
 
 namespace QSMGMT
 {
@@ -11,6 +12,7 @@ namespace QSMGMT
 
         private string PfxPath = "";
         private Form1 _form = null;
+        private string _currentDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
         public CreateConnection(Form1 form)
         {
@@ -18,36 +20,37 @@ namespace QSMGMT
             _form = form;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public CreateConnection (Form1 form, string error)
         {
-
+            InitializeComponent();
+            _form = form;
+            lblError.Text = error;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnTest_Click(object sender, EventArgs e)
         {
 
               ServerUrlTextBox.Enabled = false;
 
-            string url = ServerUrlTextBox.Text;
+            Connection conn = new Connection(ServerUrlTextBox.Text, @"\QS Certificates\" + ServerName.Text + @"\client.pfx", ClientPassword.Text,UserId.Text,Password.Text, ServerName.Text);
+            conn.ConnectToQlikSense();
 
-            ILocation location = new Connetion(url, PfxPath, ClientPassword.Text,UserId.Text,Password.Text).location;
-
+            ILocation location = conn.Location;
 
             if (location.IsAlive()) {
-                pictureBox1.Image = new Bitmap(@"C:\GITHUB\QSMGMT\QSMGMT\QSMGMT\Images\Success.png");
+                pictureBox1.Image = new Bitmap(Path.Combine(_currentDir + @"\Images\Success.png"));
                 _form.location = location;
+                btnSave.Enabled = true;
             }
             else
             {
-                pictureBox1.Image = new Bitmap(@"C:\GITHUB\QSMGMT\QSMGMT\QSMGMT\Images\Error.png");
-
-
+                pictureBox1.Image = new Bitmap(Path.Combine(_currentDir + @"\Images\Error.png"));
                 ServerUrlTextBox.Enabled = true;
             }
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BrowseClient_Click(object sender, EventArgs e)
         {
             if(ServerName.Text.Length >= 0)
             {
@@ -63,8 +66,8 @@ namespace QSMGMT
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
 
-                    PfxPath = Path.Combine(@"C:\GITHUB\QSMGMT\QSMGMT\QSMGMT\QS Certificates\" + ServerName.Text + @"\client.pfx");
-                    System.IO.Directory.CreateDirectory(@"C:\GITHUB\QSMGMT\QSMGMT\QSMGMT\QS Certificates\" + ServerName.Text);
+                    PfxPath = Path.Combine(_currentDir + @"\QS Certificates\" + ServerName.Text + @"\client.pfx");
+                    System.IO.Directory.CreateDirectory(Path.Combine(_currentDir + @"\QS Certificates\" + ServerName.Text));
                     string destFile = Path.Combine(Path.GetFullPath(openFileDialog.FileName));
                     textBox1.Text = destFile;
 
@@ -78,22 +81,7 @@ namespace QSMGMT
             ClientPassword.Enabled = true;
             Password.Enabled = true;
             UserId.Enabled = true;
-            button1.Enabled = true;
-        
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
+            btnTest.Enabled = true;
 
         }
 
@@ -102,9 +90,20 @@ namespace QSMGMT
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Connection conn = new Connection(ServerUrlTextBox.Text, @"\QS Certificates\" + ServerName.Text, ClientPassword.Text, UserId.Text, Password.Text, ServerName.Text);
+                _form.ConnRepo.AddConnection(conn);
+                _form.RefreshCmbConnections();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                btnSave.Enabled = false;
+            }
         }
     }
 }

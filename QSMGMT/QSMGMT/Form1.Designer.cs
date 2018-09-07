@@ -35,25 +35,27 @@
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbConnections = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Version
             // 
             this.Version.AutoSize = true;
-            this.Version.Location = new System.Drawing.Point(113, 58);
+            this.Version.Location = new System.Drawing.Point(62, 31);
+            this.Version.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(64, 25);
+            this.Version.Size = new System.Drawing.Size(35, 13);
             this.Version.TabIndex = 0;
             this.Version.Text = "label1";
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(945, 139);
+            this.listBox1.Location = new System.Drawing.Point(515, 75);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(463, 364);
+            this.listBox1.Size = new System.Drawing.Size(254, 199);
             this.listBox1.TabIndex = 1;
             // 
             // menuStrip1
@@ -64,14 +66,15 @@
             this.connectionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1806, 38);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(985, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(56, 34);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // connectionToolStripMenuItem
@@ -80,32 +83,43 @@
             this.newConnectionToolStripMenuItem,
             this.showConnectionsToolStripMenuItem});
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
-            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(131, 34);
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(81, 22);
             this.connectionToolStripMenuItem.Text = "Connection";
             // 
             // newConnectionToolStripMenuItem
             // 
             this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
-            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.newConnectionToolStripMenuItem.Text = "New Connection";
             this.newConnectionToolStripMenuItem.Click += new System.EventHandler(this.newConnectionToolStripMenuItem_Click);
             // 
             // showConnectionsToolStripMenuItem
             // 
             this.showConnectionsToolStripMenuItem.Name = "showConnectionsToolStripMenuItem";
-            this.showConnectionsToolStripMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.showConnectionsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.showConnectionsToolStripMenuItem.Text = "Show Connections";
             this.showConnectionsToolStripMenuItem.Click += new System.EventHandler(this.showConnectionsToolStripMenuItem_Click);
             // 
+            // cmbConnections
+            // 
+            this.cmbConnections.FormattingEnabled = true;
+            this.cmbConnections.Location = new System.Drawing.Point(13, 55);
+            this.cmbConnections.Name = "cmbConnections";
+            this.cmbConnections.Size = new System.Drawing.Size(197, 21);
+            this.cmbConnections.TabIndex = 3;
+            this.cmbConnections.SelectedIndexChanged += new System.EventHandler(this.cmbConnections_SelectedIndexChanged);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1806, 907);
+            this.ClientSize = new System.Drawing.Size(985, 491);
+            this.Controls.Add(this.cmbConnections);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.Version);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -125,6 +139,7 @@
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showConnectionsToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmbConnections;
     }
 }
 

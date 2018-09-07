@@ -72,7 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connetion.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="CreateConnection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\ConnectionRepository.cs" />
     <EmbeddedResource Include="CreateConnection.resx">
       <DependentUpon>CreateConnection.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +121,7 @@
     <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Connections\" />
     <Folder Include="Images\" />
     <Folder Include="QS Certificates\CRED DEMO SERVER\CREDON35\" />
   </ItemGroup>

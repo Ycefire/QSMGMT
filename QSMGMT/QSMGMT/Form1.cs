@@ -11,11 +11,14 @@ using System.Security.Cryptography.X509Certificates;
 using Qlik.Engine;
 using Qlik.Engine.Communication;
 using System.IO;
+using QSMGMT.Repos;
 
 namespace QSMGMT
 {
     public partial class Form1 : Form
     {
+        private ConnectionRepository _connRepo = new ConnectionRepository();
+        private Connection _currentConn;
         private ILocation _location = null;
 
         public Form1()
@@ -30,6 +33,19 @@ namespace QSMGMT
             set { _location = value; }
         }
 
+        internal ConnectionRepository ConnRepo
+        {
+            get
+            {
+                return _connRepo;
+            }
+
+            set
+            {
+                _connRepo = value;
+            }
+        }
+
         internal static byte[] ReadFile(string fileName)
         {
             FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -42,6 +58,17 @@ namespace QSMGMT
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            { 
+                RefreshCmbConnections();
+               
+            }
+            catch (Exception ex)
+            {
+
+                CreateConnection ConnectionForm = new CreateConnection(this,ex.Message);
+                ConnectionForm.ShowDialog();
+            }
             //ILocation location = new Connetion().location;
 
             //MessageBox.Show("Alive: " + location.IsAlive());
@@ -57,6 +84,14 @@ namespace QSMGMT
             //listBox1.DataSource = test;
         }
 
+        internal void RefreshCmbConnections()
+        {
+            cmbConnections.DataSource = null;
+            cmbConnections.Items.Clear();
+            cmbConnections.DataSource = _connRepo.ConnectionList;
+            cmbConnections.DisplayMember = "Name";
+        }
+
         private void showConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
@@ -65,6 +100,11 @@ namespace QSMGMT
         {
             CreateConnection ConnectionForm = new CreateConnection(this);
             ConnectionForm.ShowDialog();
+        }
+
+        private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _currentConn = (Connection)cmbConnections.SelectedItem;
         }
     }
 }
