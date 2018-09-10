@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,15 +13,15 @@ namespace QSMGMT.Web_APIs
     class QS_Repository_API
     {
         private Connection _currentConn;
-        private QS_Proxy_API _proxyAPI;
+        //private QS_Proxy_API _proxyAPI;
         private string _repositoryAPIPortAndAddress = ":4242/qrs/";
 
         #region Constructors
 
-        public QS_Repository_API (Connection conn)
+        public QS_Repository_API(Connection conn)
         {
             CurrentConn = conn;
-            _proxyAPI = new QS_Proxy_API(conn);
+            //_proxyAPI = new QS_Proxy_API(conn);
         }
 
         #endregion Constructors
@@ -40,22 +42,30 @@ namespace QSMGMT.Web_APIs
             }
         }
 
-        internal QS_Proxy_API ProxyAPI
-        {
-            get
-            {
-                return _proxyAPI;
-            }
-        }
+        //internal QS_Proxy_API ProxyAPI
+        //{
+        //    get
+        //    {
+        //        return _proxyAPI;
+        //    }
+        //}
 
         #endregion GET/SET
 
+        private void DisableCertificateSecurity()
+        {
+            ServicePointManager.ServerCertificateValidationCallback =
+            delegate (object s, X509Certificate certificate,
+                  X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            { return true; };
+        }
 
         #region API Methods
 
-        public string GetSwaggerJson ()
+        public string GetSwaggerJson()
         {
-            string ticket = _proxyAPI.TicketRequest();
+            DisableCertificateSecurity();
+            //string ticket = _proxyAPI.TicketRequest();
 
             //Create URL to REST endpoint for tickets
             string url = Path.Combine(_currentConn.BaseUrl + _repositoryAPIPortAndAddress + "about/openapi/main");
@@ -76,23 +86,9 @@ namespace QSMGMT.Web_APIs
             Stream Stream = Response.GetResponseStream();
             string json = new StreamReader(Stream).ReadToEnd();
 
-
-            
-            //dynamic oo = JsonConvert.DeserializeObject(json);
-            //Dictionary<string, Task> ret = new Dictionary<string, Task>();
-            //foreach (var k in oo)
-            //{
-            //    Guid g = new Guid(k.id.ToString());
-            //    string name = k.name.ToString();
-            //    bool enabled = k.enabled.ToString().Equals("true");
-            //    int status = System.Convert.ToInt32(k.operational.lastExecutionResult.status.ToString());
-
-            //    ret.Add(name, new Task(g, name, enabled, status));
-            //}
-
             return json;
 
-        } 
+        }
 
         #endregion API Methods
     }

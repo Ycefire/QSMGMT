@@ -99,7 +99,14 @@ namespace QSMGMT
 
         private void RefreshServerInfo(Connection conn)
         {
-            lbServerInfo.Text = conn.QsRepoAPI.GetSwaggerJson();
+            try
+            {
+                txtServerInfo.Text = conn.QsRepoAPI.GetSwaggerJson();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message + "\r\n" + ex.InnerException.Message;
+            }
         }
     }
 }

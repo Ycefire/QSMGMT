@@ -28,35 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Version = new System.Windows.Forms.Label();
-            this.lbServerInfo = new System.Windows.Forms.ListBox();
+            this.lblError = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbConnections = new System.Windows.Forms.ComboBox();
+            this.txtServerInfo = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Version
+            // lblError
             // 
-            this.Version.AutoSize = true;
-            this.Version.Location = new System.Drawing.Point(62, 31);
-            this.Version.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(35, 13);
-            this.Version.TabIndex = 0;
-            this.Version.Text = "label1";
-            // 
-            // lbServerInfo
-            // 
-            this.lbServerInfo.FormattingEnabled = true;
-            this.lbServerInfo.Location = new System.Drawing.Point(515, 75);
-            this.lbServerInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.lbServerInfo.Name = "lbServerInfo";
-            this.lbServerInfo.Size = new System.Drawing.Size(254, 199);
-            this.lbServerInfo.TabIndex = 1;
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(11, 31);
+            this.lblError.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(10, 13);
+            this.lblError.TabIndex = 0;
+            this.lblError.Text = " ";
             // 
             // menuStrip1
             // 
@@ -109,14 +100,23 @@
             this.cmbConnections.TabIndex = 3;
             this.cmbConnections.SelectedIndexChanged += new System.EventHandler(this.cmbConnections_SelectedIndexChanged);
             // 
+            // txtServerInfo
+            // 
+            this.txtServerInfo.Location = new System.Drawing.Point(243, 56);
+            this.txtServerInfo.Multiline = true;
+            this.txtServerInfo.Name = "txtServerInfo";
+            this.txtServerInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtServerInfo.Size = new System.Drawing.Size(699, 362);
+            this.txtServerInfo.TabIndex = 4;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 491);
+            this.Controls.Add(this.txtServerInfo);
             this.Controls.Add(this.cmbConnections);
-            this.Controls.Add(this.lbServerInfo);
-            this.Controls.Add(this.Version);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -132,14 +132,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label Version;
-        private System.Windows.Forms.ListBox lbServerInfo;
+        private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showConnectionsToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbConnections;
+        private System.Windows.Forms.TextBox txtServerInfo;
     }
 }
 

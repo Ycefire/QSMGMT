@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using QSMGMT;
@@ -41,6 +43,14 @@ namespace QSMGMT.Web_APIs
         #endregion GET/SET
 
 
+        private void DisableCertificateSecurity()
+        {
+            ServicePointManager.ServerCertificateValidationCallback =
+            delegate (object s, X509Certificate certificate,
+                  X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            { return true; };
+        }
+
         private void SetConnection (Connection conn)
         {
             _currentConn = conn;
@@ -51,6 +61,8 @@ namespace QSMGMT.Web_APIs
 
         public string TicketRequest()
         {
+            DisableCertificateSecurity();
+
             //Create URL to REST endpoint for tickets
             string url = Path.Combine(_currentConn.BaseUrl + _proxyAPIPortAndAddress + "ticket");
 
@@ -59,6 +71,7 @@ namespace QSMGMT.Web_APIs
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url + "?xrfkey=" + Xrfkey);
             // Add the method to authentication the user
             Request.ClientCertificates.Add(_currentConn.Cert);
+            Request.AuthenticationLevel = System.Net.Security.AuthenticationLevel.None;
             Request.Method = "POST";
             Request.Accept = "application/json";
             Request.Headers.Add("X-Qlik-Xrfkey", Xrfkey);
