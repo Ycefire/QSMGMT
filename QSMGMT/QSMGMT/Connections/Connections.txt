@@ -1,0 +1,1 @@
+https://52.57.201.214|\QS Certificates\QS DEMO\Client.pfx||qsadmin|demo|QS DEMO

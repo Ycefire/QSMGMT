@@ -9,19 +9,20 @@ namespace QSMGMT.Repos
 {
     class ConnectionRepository
     {
-        private List<Connection> _connectionList = new List<Connection>();
+        private List<Connection> _connectionList;
         private string connectionPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Connections", "Connections.txt");
 
 
         public ConnectionRepository ()
         {
-            LoadConnections();
+            
         }
 
         public List<Connection> ConnectionList
         {
             get
             {
+                LoadConnections();
                 return _connectionList;
             }
 
@@ -49,7 +50,7 @@ namespace QSMGMT.Repos
 
         private void LoadConnections()
         {
-            
+            _connectionList = new List<Connection>();
 
             try
             {

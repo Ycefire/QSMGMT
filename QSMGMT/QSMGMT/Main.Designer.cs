@@ -1,6 +1,6 @@
 ﻿namespace QSMGMT
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Version = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbServerInfo = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,14 +49,14 @@
             this.Version.TabIndex = 0;
             this.Version.Text = "label1";
             // 
-            // listBox1
+            // lbServerInfo
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(515, 75);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(254, 199);
-            this.listBox1.TabIndex = 1;
+            this.lbServerInfo.FormattingEnabled = true;
+            this.lbServerInfo.Location = new System.Drawing.Point(515, 75);
+            this.lbServerInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.lbServerInfo.Name = "lbServerInfo";
+            this.lbServerInfo.Size = new System.Drawing.Size(254, 199);
+            this.lbServerInfo.TabIndex = 1;
             // 
             // menuStrip1
             // 
@@ -109,19 +109,19 @@
             this.cmbConnections.TabIndex = 3;
             this.cmbConnections.SelectedIndexChanged += new System.EventHandler(this.cmbConnections_SelectedIndexChanged);
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 491);
             this.Controls.Add(this.cmbConnections);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lbServerInfo);
             this.Controls.Add(this.Version);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "Main";
+            this.Text = "Main";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -133,7 +133,7 @@
         #endregion
 
         private System.Windows.Forms.Label Version;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbServerInfo;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;

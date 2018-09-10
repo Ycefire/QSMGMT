@@ -11,16 +11,16 @@ namespace QSMGMT
     {
 
         private string PfxPath = "";
-        private Form1 _form = null;
+        private Main _form = null;
         private string _currentDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
-        public CreateConnection(Form1 form)
+        public CreateConnection(Main form)
         {
             InitializeComponent();
             _form = form;
         }
 
-        public CreateConnection (Form1 form, string error)
+        public CreateConnection (Main form, string error)
         {
             InitializeComponent();
             _form = form;
@@ -94,7 +94,7 @@ namespace QSMGMT
         {
             try
             {
-                Connection conn = new Connection(ServerUrlTextBox.Text, @"\QS Certificates\" + ServerName.Text, ClientPassword.Text, UserId.Text, Password.Text, ServerName.Text);
+                Connection conn = new Connection(ServerUrlTextBox.Text, Path.Combine(@"\QS Certificates\" + ServerName.Text + @"\Client.pfx"), ClientPassword.Text, UserId.Text, Password.Text, ServerName.Text);
                 _form.ConnRepo.AddConnection(conn);
                 _form.RefreshCmbConnections();
                 this.Close();

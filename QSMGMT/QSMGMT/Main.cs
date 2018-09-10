@@ -15,13 +15,13 @@ using QSMGMT.Repos;
 
 namespace QSMGMT
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        private ConnectionRepository _connRepo = new ConnectionRepository();
+        private ConnectionRepository _connRepo;
         private Connection _currentConn;
         private ILocation _location = null;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
@@ -59,7 +59,8 @@ namespace QSMGMT
         private void Form1_Load(object sender, EventArgs e)
         {
             try
-            { 
+            {
+                _connRepo = new ConnectionRepository();
                 RefreshCmbConnections();
                
             }
@@ -69,19 +70,7 @@ namespace QSMGMT
                 CreateConnection ConnectionForm = new CreateConnection(this,ex.Message);
                 ConnectionForm.ShowDialog();
             }
-            //ILocation location = new Connetion().location;
-
-            //MessageBox.Show("Alive: " + location.IsAlive());
-
-            //List<String> test = new List<String>();
-
-            //foreach (IAppIdentifier appIdentifier in location.GetAppIdentifiers())
-            //{
-            //    Console.WriteLine(appIdentifier.AppName);
-            //    test.Add(appIdentifier.AppName);
-            //}
-
-            //listBox1.DataSource = test;
+         
         }
 
         internal void RefreshCmbConnections()
@@ -105,6 +94,12 @@ namespace QSMGMT
         private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentConn = (Connection)cmbConnections.SelectedItem;
+            RefreshServerInfo(_currentConn);
+        }
+
+        private void RefreshServerInfo(Connection conn)
+        {
+            lbServerInfo.Text = conn.QsRepoAPI.GetSwaggerJson();
         }
     }
 }
