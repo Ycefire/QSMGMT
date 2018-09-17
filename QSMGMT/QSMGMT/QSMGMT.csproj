@@ -89,7 +89,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QS Classes\About.cs" />
+    <Compile Include="QS Classes\SystemRule.cs" />
     <Compile Include="Repos\ConnectionRepository.cs" />
     <Compile Include="Web APIs\QS Proxy API.cs" />
     <Compile Include="Web APIs\QS Repository API.cs" />
@@ -128,7 +128,7 @@
   <ItemGroup>
     <Folder Include="Connections\" />
     <Folder Include="Images\" />
-    <Folder Include="QS Certificates\CRED DEMO SERVER\CREDON35\" />
+    <Folder Include="QS Certificates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

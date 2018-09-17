@@ -101,7 +101,8 @@ namespace QSMGMT
         {
             try
             {
-                txtServerInfo.Text = conn.QsRepoAPI.GetSwaggerJson();
+                txtServerInfo.Text = conn.QsRepoAPI.GetSecurityRulesJSON();
+                dgvSysRules.DataSource = conn.QsRepoAPI.GetSecurityRules();
             }
             catch (Exception ex)
             {

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -7,6 +9,8 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using QSMGMT.QS_Classes;
 
 namespace QSMGMT.Web_APIs
 {
@@ -21,7 +25,7 @@ namespace QSMGMT.Web_APIs
         public QS_Repository_API(Connection conn)
         {
             CurrentConn = conn;
-            //_proxyAPI = new QS_Proxy_API(conn);
+            
         }
 
         #endregion Constructors
@@ -62,13 +66,12 @@ namespace QSMGMT.Web_APIs
 
         #region API Methods
 
-        public string GetSwaggerJson()
+        public string GetBasicAPICall(string endpoint)
         {
             DisableCertificateSecurity();
-            //string ticket = _proxyAPI.TicketRequest();
 
             //Create URL to REST endpoint for tickets
-            string url = Path.Combine(_currentConn.BaseUrl + _repositoryAPIPortAndAddress + "about/openapi/main");
+            string url = Path.Combine(_currentConn.BaseUrl + _repositoryAPIPortAndAddress + endpoint);
 
             //Create the HTTP Request and add required headers and content in Xrfkey
             string Xrfkey = "0123456789xbcdef";
@@ -86,8 +89,31 @@ namespace QSMGMT.Web_APIs
             Stream Stream = Response.GetResponseStream();
             string json = new StreamReader(Stream).ReadToEnd();
 
-            return json;
+            var jsonObj = JsonConvert.DeserializeObject(json);
+            return JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
+        }
 
+        public string GetSwaggerJSON()
+        {
+            return GetBasicAPICall("about/openapi/main");
+        }
+
+        public string GetEnumsJSON()
+        {
+            return GetBasicAPICall("about/api/enums");
+        }
+
+        public string GetSecurityRulesJSON()
+        {
+            return GetBasicAPICall("systemrule/full");
+        }
+
+        public ObservableCollection<SystemRule> GetSecurityRules()
+        {
+            string systemRulesJSON = GetBasicAPICall("systemrule/full");
+            ObservableCollection<SystemRule> systemRules = new ObservableCollection<SystemRule>(JsonConvert.DeserializeObject<IEnumerable<SystemRule>>(systemRulesJSON));
+
+            return systemRules;
         }
 
         #endregion API Methods

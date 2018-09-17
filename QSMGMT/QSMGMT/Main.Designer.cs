@@ -36,7 +36,9 @@
             this.showConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbConnections = new System.Windows.Forms.ComboBox();
             this.txtServerInfo = new System.Windows.Forms.TextBox();
+            this.dgvSysRules = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSysRules)).BeginInit();
             this.SuspendLayout();
             // 
             // lblError
@@ -58,7 +60,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(985, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1526, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -103,17 +105,28 @@
             // txtServerInfo
             // 
             this.txtServerInfo.Location = new System.Drawing.Point(243, 56);
+            this.txtServerInfo.MaxLength = 0;
             this.txtServerInfo.Multiline = true;
             this.txtServerInfo.Name = "txtServerInfo";
+            this.txtServerInfo.ReadOnly = true;
             this.txtServerInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtServerInfo.Size = new System.Drawing.Size(699, 362);
+            this.txtServerInfo.Size = new System.Drawing.Size(312, 370);
             this.txtServerInfo.TabIndex = 4;
+            // 
+            // dgvSysRules
+            // 
+            this.dgvSysRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSysRules.Location = new System.Drawing.Point(571, 55);
+            this.dgvSysRules.Name = "dgvSysRules";
+            this.dgvSysRules.Size = new System.Drawing.Size(943, 371);
+            this.dgvSysRules.TabIndex = 5;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 491);
+            this.ClientSize = new System.Drawing.Size(1526, 491);
+            this.Controls.Add(this.dgvSysRules);
             this.Controls.Add(this.txtServerInfo);
             this.Controls.Add(this.cmbConnections);
             this.Controls.Add(this.lblError);
@@ -125,6 +138,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSysRules)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,6 +154,7 @@
         private System.Windows.Forms.ToolStripMenuItem showConnectionsToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbConnections;
         private System.Windows.Forms.TextBox txtServerInfo;
+        private System.Windows.Forms.DataGridView dgvSysRules;
     }
 }
 
