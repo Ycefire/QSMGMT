@@ -15,8 +15,6 @@ namespace QSMGMT
         public Main()
         {
             InitializeComponent();
-
-
         }
         
         public ILocation location
@@ -40,21 +38,27 @@ namespace QSMGMT
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateConnectionRepo();
+        }
+
+        //UPDATE CONNECTION ON FIRST LOAD OR START CREATION FORM
+        private void CreateConnectionRepo()
+        {
             try
             {
                 _connRepo = new ConnectionRepository();
                 RefreshCmbConnections();
-               
+
             }
             catch (Exception ex)
             {
 
-                CreateConnection ConnectionForm = new CreateConnection(this,ex.Message);
+                CreateConnection ConnectionForm = new CreateConnection(this, ex.Message);
                 ConnectionForm.ShowDialog();
             }
-         
         }
 
+        //REFRESH THE CONNECTIONS IN THE COMBOBOX
         internal void RefreshCmbConnections()
         {
             cmbConnections.DataSource = null;
@@ -63,40 +67,26 @@ namespace QSMGMT
             cmbConnections.DisplayMember = "Name";
         }
 
-        private void showConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        //UPDATE CURRENT CONNECTION WHEN SELECTION IN COMBOBOX IS UPDATED
+        private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _currentConn = (Connection)cmbConnections.SelectedItem;
         }
+                
 
+        /*================================================================================
+                                   CONNECTIONS TO OTHER FORMS 
+        ================================================================================*/
+
+        /*============================= TOOLSTRIP BASED ================================*/
+        //QS CONNECTION DIALOG
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateConnection ConnectionForm = new CreateConnection(this);
             ConnectionForm.ShowDialog();
         }
 
-        private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _currentConn = (Connection)cmbConnections.SelectedItem;
-            RefreshServerInfo(_currentConn);
-        }
-
-        private void RefreshServerInfo(Connection conn)
-        {
-            try
-            {
-                txtServerInfo.Text = conn.QsRepoAPI.GetSecurityRulesJSON();
-                dgvSysRules.DataSource = conn.QsRepoAPI.GetSecurityRules();
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message + "\r\n" + ex.InnerException.Message;
-            }
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //QS SECURITY RULE MANAGER DIALOG
         private void securityRuleManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SecurityRuleForm SecurityRuleForm = new SecurityRuleForm(this);
@@ -104,12 +94,17 @@ namespace QSMGMT
             SecurityRuleForm.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /*============================= BUTTON BASED ================================*/
+        //QS SECURITY RULE MANAGER DIALOG
+        private void btnSecurtiyRules_Click(object sender, EventArgs e)
         {
             SecurityRuleForm SecurityRuleForm = new SecurityRuleForm(this);
             this.Hide();
             SecurityRuleForm.ShowDialog();
 
         }
+
+
+
     }
 }

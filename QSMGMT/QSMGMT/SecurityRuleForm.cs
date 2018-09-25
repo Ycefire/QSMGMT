@@ -1,4 +1,5 @@
-﻿using QSMGMT.Repos;
+﻿using QSMGMT.QS_Classes;
+using QSMGMT.Repos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,11 @@ namespace QSMGMT
 
             InitializeDataGrid();
 
+            _connRepo = form.ConnRepo;
+            RefreshCmbConnections();
+            RefreshServerInfo((Connection)cmbConnections.SelectedItem);
+            dgvSysRules.Width = Screen.PrimaryScreen.Bounds.Width;
+            dgvSysRules.MultiSelect = false;
         }
 
         private void InitializeDataGrid()
@@ -52,12 +58,7 @@ namespace QSMGMT
 
             }
         }
-
-        private void SecurityRuleForm_Load(object sender, EventArgs e)
-        { 
-                _connRepo = new ConnectionRepository();
-                RefreshCmbConnections();    
-        }
+        
         private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentConn = (Connection)cmbConnections.SelectedItem;
@@ -87,6 +88,18 @@ namespace QSMGMT
             catch (Exception ex)
             {
                 lblError.Text = ex.Message + "\r\n" + ex.InnerException.Message;
+            }
+        }
+
+
+        private void dgvSysRules_SelectionChanged(object sender, EventArgs e)
+        {
+            
+            if (dgvSysRules.SelectedRows.Count > 0)
+            {
+                SystemRule securtiyRule = (SystemRule)dgvSysRules.CurrentRow.DataBoundItem;
+                txtId.Text = securtiyRule.id;
+                dtpCreationDate.Text = securtiyRule.createdDate.ToLongDateString();
             }
         }
     }
