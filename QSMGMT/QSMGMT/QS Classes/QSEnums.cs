@@ -52,4 +52,11 @@ namespace QSMGMT.QS_Classes
         NotSynced,
         NotMigrated
     }
+
+    public enum RuleState
+    {
+        Undefined,
+        TaskSuccessful,
+        TaskFail
+    }
 }
