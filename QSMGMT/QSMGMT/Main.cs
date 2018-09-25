@@ -1,6 +1,7 @@
 ﻿using Qlik.Engine;
 using QSMGMT.Repos;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -39,6 +40,7 @@ namespace QSMGMT
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateConnectionRepo();
+            
         }
 
         //UPDATE CONNECTION ON FIRST LOAD OR START CREATION FORM
@@ -65,19 +67,20 @@ namespace QSMGMT
             cmbConnections.Items.Clear();
             cmbConnections.DataSource = _connRepo.ConnectionList;
             cmbConnections.DisplayMember = "Name";
+            
         }
 
-        //UPDATE CURRENT CONNECTION WHEN SELECTION IN COMBOBOX IS UPDATED
-        private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
+    //UPDATE CURRENT CONNECTION WHEN SELECTION IN COMBOBOX IS UPDATED
+    private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentConn = (Connection)cmbConnections.SelectedItem;
         }
-                
 
+        #region Connections to other forms
         /*================================================================================
                                    CONNECTIONS TO OTHER FORMS 
         ================================================================================*/
-
+        #region Toolstrip Based
         /*============================= TOOLSTRIP BASED ================================*/
         //QS CONNECTION DIALOG
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,6 +97,9 @@ namespace QSMGMT
             SecurityRuleForm.ShowDialog();
         }
 
+        #endregion Toolstrip Based
+
+        #region Button Based
         /*============================= BUTTON BASED ================================*/
         //QS SECURITY RULE MANAGER DIALOG
         private void btnSecurtiyRules_Click(object sender, EventArgs e)
@@ -103,7 +109,9 @@ namespace QSMGMT
             SecurityRuleForm.ShowDialog();
 
         }
+        #endregion Button Based
 
+        #endregion Connections to other forms
 
 
     }
