@@ -9,13 +9,6 @@ namespace QSMGMT.QS_Classes
 {
     public class SystemRule
     {
-        public enum RuleContextEnum
-        {
-            BothQlikSenseAndQMC,
-            QlikSenseOnly,
-            QMCOnly
-        }
-
         public SystemRule()
         {
         }
@@ -57,7 +50,7 @@ namespace QSMGMT.QS_Classes
         public bool disabled { get; set; }
 
         [JsonProperty("ruleContext")]
-        public RuleContextEnum RuleContext { get; set; }
+        public RuleContext RuleContext { get; set; }
 
         [JsonProperty("seedId")]
         public string seedId { get; set; }

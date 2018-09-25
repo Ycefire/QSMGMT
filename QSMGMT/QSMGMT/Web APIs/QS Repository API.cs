@@ -108,12 +108,65 @@ namespace QSMGMT.Web_APIs
             return GetBasicAPICall("systemrule/full");
         }
 
+        public string GetReloadTasksJSON()
+        {
+            return GetBasicAPICall("reloadtask/full");
+        }
+
+        public string GetStreamsJSON()
+        {
+            return GetBasicAPICall("stream/full");
+        }
+
+        public string GetAppsJSON()
+        {
+            return GetBasicAPICall("app/full");
+        }
+
+        public string GetUsersJSON()
+        {
+            return GetBasicAPICall("user/full");
+        }
+
         public ObservableCollection<SystemRule> GetSecurityRules()
         {
-            string systemRulesJSON = GetBasicAPICall("systemrule/full");
+            string systemRulesJSON = GetSecurityRulesJSON();
             ObservableCollection<SystemRule> systemRules = new ObservableCollection<SystemRule>(JsonConvert.DeserializeObject<IEnumerable<SystemRule>>(systemRulesJSON));
 
             return systemRules;
+        }
+
+
+        public ObservableCollection<ReloadTask> GetReloadTasks()
+        {
+            string reloadTasksJSON = GetReloadTasksJSON();
+            ObservableCollection<ReloadTask> reloadTasks = new ObservableCollection<ReloadTask>(JsonConvert.DeserializeObject<IEnumerable<ReloadTask>>(reloadTasksJSON));
+
+            return reloadTasks;
+        }
+
+        public ObservableCollection<QsStream> GetStreams()
+        {
+            string streamsJSON = GetStreamsJSON();
+            ObservableCollection<QsStream> streams = new ObservableCollection<QsStream>(JsonConvert.DeserializeObject<IEnumerable<QsStream>>(streamsJSON));
+
+            return streams;
+        }
+
+        public ObservableCollection<App> GetApps()
+        {
+            string appsJSON = GetAppsJSON();
+            ObservableCollection<App> apps = new ObservableCollection<App>(JsonConvert.DeserializeObject<IEnumerable<App>>(appsJSON));
+
+            return apps;
+        }
+
+        public ObservableCollection<User> GetUsers()
+        {
+            string usersJSON = GetUsersJSON();
+            ObservableCollection<User> users = new ObservableCollection<User>(JsonConvert.DeserializeObject<IEnumerable<User>>(usersJSON));
+
+            return users;
         }
 
         #endregion API Methods
