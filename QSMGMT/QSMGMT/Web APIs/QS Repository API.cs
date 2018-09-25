@@ -66,6 +66,14 @@ namespace QSMGMT.Web_APIs
 
         #region API Methods
 
+        #region API Updates
+
+
+
+        #endregion API Updates
+
+        #region API Gets
+
         public string GetBasicAPICall(string endpoint)
         {
             DisableCertificateSecurity();
@@ -129,6 +137,12 @@ namespace QSMGMT.Web_APIs
             return GetBasicAPICall("user/full");
         }
 
+        public string GetCompositeEventsJSON()
+        {
+            return GetBasicAPICall("compositeevent/full");
+        }
+        
+
         public ObservableCollection<SystemRule> GetSecurityRules()
         {
             string systemRulesJSON = GetSecurityRulesJSON();
@@ -169,6 +183,16 @@ namespace QSMGMT.Web_APIs
 
             return users;
         }
+
+        public ObservableCollection<CompositeEvent> GetCompositeEvents()
+        {
+            string compositeEventsJSON = GetCompositeEventsJSON();
+            ObservableCollection<CompositeEvent> compositeEvents = new ObservableCollection<CompositeEvent>(JsonConvert.DeserializeObject<IEnumerable<CompositeEvent>>(compositeEventsJSON));
+
+            return compositeEvents;
+        }
+
+        #endregion API Gets
 
         #endregion API Methods
     }

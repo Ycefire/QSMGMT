@@ -91,10 +91,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QS Classes\App.cs" />
+    <Compile Include="QS Classes\CompositeEvent.cs" />
+    <Compile Include="QS Classes\CompositeRule.cs" />
     <Compile Include="QS Classes\QSEnums.cs" />
     <Compile Include="QS Classes\QSStream.cs" />
     <Compile Include="QS Classes\ReloadTask.cs" />
     <Compile Include="QS Classes\SystemRule.cs" />
+    <Compile Include="QS Classes\TimeConstraint.cs" />
     <Compile Include="QS Classes\User.cs" />
     <Compile Include="Repos\ConnectionRepository.cs" />
     <Compile Include="SecurityRuleForm.cs">
