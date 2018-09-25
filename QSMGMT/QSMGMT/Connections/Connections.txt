@@ -1,1 +1,1 @@
-https://52.57.201.214|\QS Certificates\QS DEMO\Client.pfx||qsadmin|demo|QS DEMO
+https://qliksense.credon.eu|\QS Certificates\DEMO CREDON\Client.pfx||qsadmin|demo|DEMO CREDON

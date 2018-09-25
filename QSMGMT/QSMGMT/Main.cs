@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
-using Qlik.Engine;
-using Qlik.Engine.Communication;
-using System.IO;
+﻿using Qlik.Engine;
 using QSMGMT.Repos;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace QSMGMT
 {
@@ -25,8 +16,9 @@ namespace QSMGMT
         {
             InitializeComponent();
 
-        }
 
+        }
+        
         public ILocation location
         {
             get { return _location; }
@@ -45,17 +37,7 @@ namespace QSMGMT
                 _connRepo = value;
             }
         }
-
-        internal static byte[] ReadFile(string fileName)
-        {
-            FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            int size = (int)f.Length;
-            byte[] data = new byte[size];
-            size = f.Read(data, 0, size);
-            f.Close();
-            return data;
-        }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             try
@@ -108,6 +90,26 @@ namespace QSMGMT
             {
                 lblError.Text = ex.Message + "\r\n" + ex.InnerException.Message;
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void securityRuleManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SecurityRuleForm SecurityRuleForm = new SecurityRuleForm(this);
+            this.Hide();
+            SecurityRuleForm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SecurityRuleForm SecurityRuleForm = new SecurityRuleForm(this);
+            this.Hide();
+            SecurityRuleForm.ShowDialog();
+
         }
     }
 }
