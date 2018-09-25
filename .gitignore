@@ -60,6 +60,7 @@ StyleCopReport.xml
 # Files by QS
 *.pfx
 *.cer
+Connections.txt
 
 # Files built by Visual Studio
 *_i.c
@@ -332,3 +333,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+QSMGMT/QSMGMT/Connections/Connections.txt
