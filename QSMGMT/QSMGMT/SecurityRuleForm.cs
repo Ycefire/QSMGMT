@@ -56,7 +56,7 @@ namespace QSMGMT
             _actionList.Add(new Actions(cbDelete, 8));
             _actionList.Add(new Actions(cbUpdate, 4));
             _actionList.Add(new Actions(cbRead, 2));
-            _actionList.Add(new Actions(cbActionCreate,1));
+            _actionList.Add(new Actions(cbActionCreate, 1));
         }
 
         private void InitializeDataGrid()
@@ -101,35 +101,79 @@ namespace QSMGMT
         }
 
 
+        #region Button actions
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            SystemRule sysrule = (SystemRule)dgvSysRules.CurrentRow.DataBoundItem;
-
-            sysrule.name = txtName.Text;
-            sysrule.rule = txtRule.Text;
-            
-            Int64 Action = 0;
-            foreach (Actions action in _actionList)
+            try
             {
-                if (action.ActionValue != 1024)
+                SystemRule sysrule = (SystemRule)dgvSysRules.CurrentRow.DataBoundItem;
+                var obcSysrule = securityRules.Single(s => s.id == sysrule.id);
+
+                obcSysrule.name = txtName.Text;
+                obcSysrule.rule = txtRule.Text;
+
+                Int64 Action = 0;
+                foreach (Actions action in _actionList)
                 {
-                    if(action.ActionCheckBox.Checked)
+                    if (action.ActionValue != 1024)
                     {
-                        Action += action.ActionValue;
+                        if (action.ActionCheckBox.Checked)
+                        {
+                            Action += action.ActionValue;
+                        }
                     }
                 }
+
+                obcSysrule.actions = Action;
+                obcSysrule.resourceFilter = txtResourceFilters.Text;
+                obcSysrule.comment = txtComments.Text;
+                obcSysrule.disabled = cbDisabled.Checked;
+                obcSysrule.RuleContext = (RuleContext)Enum.Parse(typeof(RuleContext), cbContext.SelectedItem.ToString());
+
+
+                //Update QS via Repo API
+                SystemRule updatedSysRule = _currentConn.QsRepoAPI.UpdateSingleSecurityRule(sysrule);
+
+                obcSysrule.modifiedByUserName = updatedSysRule.modifiedByUserName;
+                obcSysrule.modifiedDate = updatedSysRule.modifiedDate;
+
+
+                dgvSysRules.Refresh();
             }
-            
-            sysrule.actions = Action;
-            sysrule.resourceFilter = txtResourceFilters.Text;
-            sysrule.comment = txtComments.Text;
-            sysrule.disabled = cbDisabled.Checked;
-            sysrule.RuleContext = (RuleContext)Enum.Parse(typeof(RuleContext), cbContext.SelectedItem.ToString());
-            
-            dgvSysRules.Refresh();
-            
+            catch (Exception ex)
+            {
+                txtServerInfo.Text = "Update failed: " + ex.Message;
+
+            }
+
         }
+
+        private void DgvSysRules_DataSourceChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void txtDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SystemRule sysrule = (SystemRule)dgvSysRules.CurrentRow.DataBoundItem;
+
+                dgvSysRules[1,0].Selected = true;
+                securityRules.Remove(sysrule);
+
+                //Update QS via Repo API
+                txtServerInfo.Text = _currentConn.QsRepoAPI.DeleteSecurityRule(sysrule);
+
+            }
+            catch (Exception ex)
+            {
+                txtServerInfo.Text = "Delete failed: " + ex.Message;
+            }
+        }
+
+        #endregion Button actions
 
         private void UpdateDetails()
         {
@@ -168,7 +212,7 @@ namespace QSMGMT
 
             foreach (Actions action in _actionList)
             {
-                if(action.ActionValue != 1024)
+                if (action.ActionValue != 1024)
                 {
                     action.ActionCheckBox.Checked = false;
 
@@ -218,5 +262,7 @@ namespace QSMGMT
         {
 
         }
+
+
     }
 }

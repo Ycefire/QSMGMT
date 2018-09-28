@@ -16,6 +16,14 @@ namespace QSMGMT.Web_APIs
 {
     class QS_Repository_API
     {
+        internal enum UpdateType
+        {
+            PUT,
+            GET,
+            DELETE,
+            POST
+        }
+
         private Connection _currentConn;
         //private QS_Proxy_API _proxyAPI;
         private string _repositoryAPIPortAndAddress = ":4242/qrs/";
@@ -25,7 +33,7 @@ namespace QSMGMT.Web_APIs
         public QS_Repository_API(Connection conn)
         {
             CurrentConn = conn;
-            
+
         }
 
         #endregion Constructors
@@ -66,15 +74,7 @@ namespace QSMGMT.Web_APIs
 
         #region API Methods
 
-        #region API Updates
-
-
-
-        #endregion API Updates
-
-        #region API Gets
-
-        public string GetBasicAPICall(string endpoint)
+        public string GetBasicAPICall(string endpoint, UpdateType type, string httpBody = "")
         {
             DisableCertificateSecurity();
 
@@ -86,14 +86,30 @@ namespace QSMGMT.Web_APIs
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url + "?xrfkey=" + Xrfkey);
             // Add the method to authentication the user
             Request.ClientCertificates.Add(_currentConn.Cert);
-            Request.Method = "GET";
+            Request.Method = type.ToString();
             Request.Accept = "application/json";
             Request.Headers.Add("X-Qlik-Xrfkey", Xrfkey);
             Request.Headers.Add("X-Qlik-User", "UserDirectory=INTERNAL; UserId=SA_ENGINE");
 
 
+
+            if (!string.IsNullOrEmpty(httpBody))
+            {
+                ASCIIEncoding encoder = new ASCIIEncoding();
+                byte[] data = encoder.GetBytes(httpBody);
+                encoder = null;
+
+                Request.ContentType = "application/json";
+                Request.Expect = "application/json";
+                Request.ContentLength = data.Length;
+
+                Request.GetRequestStream().Write(data, 0, data.Length);
+
+            }
+
             // make the web request and return the content
-            HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
+            HttpWebResponse Response = Response = (HttpWebResponse)Request.GetResponse();
+
             Stream Stream = Response.GetResponseStream();
             string json = new StreamReader(Stream).ReadToEnd();
 
@@ -101,47 +117,77 @@ namespace QSMGMT.Web_APIs
             return JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
         }
 
+
+        #region API Deletes
+
+        public string DeleteSecurityRule(SystemRule rule)
+        {
+            string systemRuleJson = JsonConvert.SerializeObject(rule);
+
+            string resultJson = GetBasicAPICall(@"systemrule\" + rule.id, UpdateType.DELETE, systemRuleJson);
+
+            return resultJson;
+        }
+
+        #endregion API Deletes
+
+        #region API Updates
+
+
+        public SystemRule UpdateSingleSecurityRule(SystemRule rule)
+        {
+            string systemRuleJson = JsonConvert.SerializeObject(rule);
+
+            string resultJson = GetBasicAPICall(@"systemrule\" + rule.id, UpdateType.PUT, systemRuleJson);
+
+            return JsonConvert.DeserializeObject<SystemRule>(resultJson);
+        }
+
+        #endregion API Updates
+
+        #region API Gets
+
         public string GetSwaggerJSON()
         {
-            return GetBasicAPICall("about/openapi/main");
+            return GetBasicAPICall("about/openapi/main", UpdateType.GET);
         }
 
         public string GetEnumsJSON()
         {
-            return GetBasicAPICall("about/api/enums");
+            return GetBasicAPICall("about/api/enums", UpdateType.GET);
         }
-        
+
 
         public string GetSecurityRulesJSON()
         {
-            return GetBasicAPICall("systemrule/full");
+            return GetBasicAPICall("systemrule/full", UpdateType.GET);
         }
 
         public string GetReloadTasksJSON()
         {
-            return GetBasicAPICall("reloadtask/full");
+            return GetBasicAPICall("reloadtask/full", UpdateType.GET);
         }
 
         public string GetStreamsJSON()
         {
-            return GetBasicAPICall("stream/full");
+            return GetBasicAPICall("stream/full", UpdateType.GET);
         }
 
         public string GetAppsJSON()
         {
-            return GetBasicAPICall("app/full");
+            return GetBasicAPICall("app/full", UpdateType.GET);
         }
 
         public string GetUsersJSON()
         {
-            return GetBasicAPICall("user/full");
+            return GetBasicAPICall("user/full", UpdateType.GET);
         }
 
         public string GetCompositeEventsJSON()
         {
-            return GetBasicAPICall("compositeevent/full");
+            return GetBasicAPICall("compositeevent/full", UpdateType.GET);
         }
-        
+
 
         public ObservableCollection<SystemRule> GetSecurityRules()
         {
