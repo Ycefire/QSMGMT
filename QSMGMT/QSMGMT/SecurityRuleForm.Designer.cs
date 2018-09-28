@@ -58,7 +58,6 @@
             this.lblContext = new System.Windows.Forms.Label();
             this.lblRule = new System.Windows.Forms.Label();
             this.cbContext = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.cbActionCreate = new System.Windows.Forms.CheckBox();
             this.cbRead = new System.Windows.Forms.CheckBox();
             this.cbUpdate = new System.Windows.Forms.CheckBox();
@@ -258,7 +257,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(1102, 1433);
+            this.btnUpdate.Location = new System.Drawing.Point(1774, 1489);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(195, 62);
             this.btnUpdate.TabIndex = 24;
@@ -270,13 +269,13 @@
             // 
             this.txtRule.AcceptsReturn = true;
             this.txtRule.AcceptsTab = true;
-            this.txtRule.Location = new System.Drawing.Point(1341, 1215);
+            this.txtRule.Location = new System.Drawing.Point(1993, 871);
             this.txtRule.Margin = new System.Windows.Forms.Padding(6);
             this.txtRule.MaxLength = 0;
             this.txtRule.Multiline = true;
             this.txtRule.Name = "txtRule";
             this.txtRule.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRule.Size = new System.Drawing.Size(628, 377);
+            this.txtRule.Size = new System.Drawing.Size(1509, 680);
             this.txtRule.TabIndex = 25;
             // 
             // lblResourceFilter
@@ -308,19 +307,19 @@
             // 
             this.txtComments.AcceptsReturn = true;
             this.txtComments.AcceptsTab = true;
-            this.txtComments.Location = new System.Drawing.Point(612, 1215);
+            this.txtComments.Location = new System.Drawing.Point(1344, 1264);
             this.txtComments.Margin = new System.Windows.Forms.Padding(6);
             this.txtComments.MaxLength = 0;
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
             this.txtComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComments.Size = new System.Drawing.Size(685, 200);
+            this.txtComments.Size = new System.Drawing.Size(637, 200);
             this.txtComments.TabIndex = 30;
             // 
             // lblComments
             // 
             this.lblComments.AutoSize = true;
-            this.lblComments.Location = new System.Drawing.Point(620, 1175);
+            this.lblComments.Location = new System.Drawing.Point(1349, 1220);
             this.lblComments.Name = "lblComments";
             this.lblComments.Size = new System.Drawing.Size(107, 25);
             this.lblComments.TabIndex = 31;
@@ -362,18 +361,6 @@
             this.cbContext.Name = "cbContext";
             this.cbContext.Size = new System.Drawing.Size(536, 32);
             this.cbContext.TabIndex = 36;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(2014, 868);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.textBox1.MaxLength = 0;
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(1509, 680);
-            this.textBox1.TabIndex = 37;
             // 
             // cbActionCreate
             // 
@@ -512,7 +499,6 @@
             this.Controls.Add(this.cbUpdate);
             this.Controls.Add(this.cbRead);
             this.Controls.Add(this.cbActionCreate);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cbContext);
             this.Controls.Add(this.lblRule);
             this.Controls.Add(this.lblContext);
@@ -576,7 +562,6 @@
         private System.Windows.Forms.Label lblContext;
         private System.Windows.Forms.Label lblRule;
         private System.Windows.Forms.ComboBox cbContext;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox cbActionCreate;
         private System.Windows.Forms.CheckBox cbRead;
         private System.Windows.Forms.CheckBox cbUpdate;
