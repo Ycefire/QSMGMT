@@ -1,2 +1,0 @@
-https://qliksense.credon.eu|\QS Certificates\DEMO CREDON\Client.pfx||qsadmin|demo|DEMO CREDON
-https://qliksense.credon.eu|\QS Certificates\TEST\Client.pfx||qsadmin|demo|TEST
